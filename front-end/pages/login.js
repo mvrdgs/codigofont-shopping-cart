@@ -7,14 +7,14 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(loginData);
-  }
+  };
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
     const updatedData = { ...loginData };
     updatedData[name] = value;
     setLoginData(updatedData);
-  }
+  };
 
   return (
     <Flex alignItems="center" justifyContent="center" height="100vh" bgColor="blue.400">
