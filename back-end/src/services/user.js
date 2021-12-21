@@ -1,5 +1,6 @@
 const userModel = require('../models/user');
 const regex = require('../utils/regex');
+const generateToken = require('../utils/generateToken');
 
 const validateUserData = (email, password, confirmPassword) => {
   if (!regex.email.test(email)) return false;
@@ -17,10 +18,12 @@ const registerUser = async ({ email, password, confirmPassword }) => {
   const isRegistered = await userModel.searchEmail(email);
   if (isRegistered) return { status: 409, message: 'Email já cadastrado' };
 
-  const { _id, email: registeredEmail } = await userModel.registerUser(email, password);
+  const { _id: userId, email: registeredEmail } = await userModel.registerUser(email, password);
+
+  const token = generateToken({ userId, email: registeredEmail });
 
   return {
-    result: { id: _id, email: registeredEmail },
+    result: { token },
     status: 201,
   };
 };
