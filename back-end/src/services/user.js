@@ -12,11 +12,11 @@ const validateUserData = (email, password, confirmPassword) => {
 
 const registerUser = async ({ email, password, confirmPassword }) => {
   if (!validateUserData(email, password, confirmPassword)) {
-    return { status: 400, message: 'Dados inválidos' };
+    return { status: 400, error: 'Dados inválidos' };
   }
   
   const isRegistered = await userModel.searchEmail(email);
-  if (isRegistered) return { status: 409, message: 'Email já cadastrado' };
+  if (isRegistered) return { status: 409, error: 'Email já cadastrado' };
 
   const { _id: userId, email: registeredEmail } = await userModel.registerUser(email, password);
 

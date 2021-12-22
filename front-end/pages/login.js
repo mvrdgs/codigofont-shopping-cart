@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Flex, FormLabel, Input, Link } from '@chakra-ui/react';
+import connection from '../utils/axios';
 
 function Login() {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(loginData);
   };
