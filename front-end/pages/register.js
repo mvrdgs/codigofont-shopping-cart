@@ -26,7 +26,6 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setErrors({ ...errors, submit: '' })
       const { data: { token } } = await connection({
         endpoint: '/register',
         method: 'post',
@@ -42,6 +41,8 @@ function Register() {
   };
 
   const handleChange = ({ target }) => {
+    if (errors.submit) setErrors({ ...errors, submit: '' });
+  
     const { name, value } = target;
     const updatedData = { ...registerData };
     updatedData[name] = value;
