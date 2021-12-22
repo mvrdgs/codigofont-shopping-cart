@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/register', userController.registerUser);
+app.post('/login', userController.login);
 
 app.use(errorMiddleware);
 
