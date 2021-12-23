@@ -7,7 +7,7 @@ import connection from '../utils/axios';
 function Register() {
   const [registerData, setRegisterData] = useState({ email: '', password: '', confirmPassword: '' });
   const [errors, setErrors] = useState({ email: '', password: '', confirmPassword: '' })
-  const [disableSubmit, setDisableSubmit] = useState(false);
+  const [disableSubmit, setDisableSubmit] = useState(true);
 
   useEffect(() => {
     const hasEmptyFields = Object.values(registerData).some((value) => value === '');
@@ -71,6 +71,7 @@ function Register() {
             <FormLabel>
               Senha
               <Input
+                autoComplete="off"
                 name="password"
                 onBlur={ () => checkError('password', regex.password.test(registerData.password), 'Password inválido') }
                 onChange={ handleChange }
@@ -84,6 +85,7 @@ function Register() {
             <FormLabel>
               Confirme sua senha
               <Input
+                autoComplete="off"
                 name="confirmPassword"
                 type="password"
                 onBlur={ () => checkError(
