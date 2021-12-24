@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import jwt from 'jsonwebtoken';
 import {
   Flex,
   Input,
@@ -15,6 +14,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import connection from '../utils/axios';
+import Header from '../components/Header';
 
 function CreateProduct() {
   const [productData, setProductData] = useState({ name: '', price: '', stock: '', image: '' });
@@ -78,84 +78,87 @@ function CreateProduct() {
   };
 
   return (
-    <Flex alignItems="center" justifyContent="center" height="100vh" bgColor="blue.400">
-      <Flex bgColor="white" display="column" p="10" rounded="10">
-        <FormControl id="name" mb="6">
-          <FormLabel display="column">
-            Nome do produto
-            <Input
-              autoComplete="off"
-              name="name"
-              onChange={ handleChange }
-              type="text"
-              value={ productData.name }
-            />
-            <FormErrorMessage></FormErrorMessage>
-          </FormLabel>
-        </FormControl>
-        <Flex>
-        <FormControl id="price">
+    <>
+      <Header />
+      <Flex alignItems="center" justifyContent="center" height="100vh" bgColor="blue.400">
+        <Flex bgColor="white" display="column" p="10" rounded="10">
+          <FormControl id="name" mb="6">
             <FormLabel display="column">
-              Preço
-              <InputGroup>
-                <InputLeftAddon>R$</InputLeftAddon>
-                <NumberInput step="0.01" min="0.01" precision="2" value={ productData.price }>
-                  <NumberInputField
-                    autoComplete="off"
-                    display="block"
-                    name="price"
-                    onChange={ handleChange }
-                    placeholder="0.00"
-                    textAlign="right"
-                    type="text"
+              Nome do produto
+              <Input
+                autoComplete="off"
+                name="name"
+                onChange={ handleChange }
+                type="text"
+                value={ productData.name }
               />
-                </NumberInput>
-              </InputGroup>
               <FormErrorMessage></FormErrorMessage>
             </FormLabel>
           </FormControl>
-          <FormControl id="stock" ml="6">
+          <Flex>
+          <FormControl id="price">
+              <FormLabel display="column">
+                Preço
+                <InputGroup>
+                  <InputLeftAddon>R$</InputLeftAddon>
+                  <NumberInput step="0.01" min="0.01" precision="2" value={ productData.price }>
+                    <NumberInputField
+                      autoComplete="off"
+                      display="block"
+                      name="price"
+                      onChange={ handleChange }
+                      placeholder="0.00"
+                      textAlign="right"
+                      type="text"
+                />
+                  </NumberInput>
+                </InputGroup>
+                <FormErrorMessage></FormErrorMessage>
+              </FormLabel>
+            </FormControl>
+            <FormControl id="stock" ml="6">
+              <FormLabel display="column">
+                Quantidade
+                <InputGroup>
+                  <NumberInput step="1" min="0" precision="0" value={ productData.stock }>
+                    <NumberInputField
+                      autoComplete="off"
+                      display="block"
+                      name="stock"
+                      onChange={ handleChange }
+                      placeholder="0"
+                      textAlign="right"
+                      type="number"
+                      value={ productData.stock }
+                    />
+                  </NumberInput>
+                  <InputRightAddon>Un</InputRightAddon>
+                </InputGroup>
+                <FormErrorMessage></FormErrorMessage>
+              </FormLabel>
+            </FormControl>
+          </Flex>
+          <FormControl id="image" mb="6">
             <FormLabel display="column">
-              Quantidade
-              <InputGroup>
-                <NumberInput step="1" min="0" precision="0" value={ productData.stock }>
-                  <NumberInputField
-                    autoComplete="off"
-                    display="block"
-                    name="stock"
-                    onChange={ handleChange }
-                    placeholder="0"
-                    textAlign="right"
-                    type="number"
-                    value={ productData.stock }
-                  />
-                </NumberInput>
-                <InputRightAddon>Un</InputRightAddon>
-              </InputGroup>
-              <FormErrorMessage></FormErrorMessage>
+              <Text>Imagem do produto</Text>
+              <input
+                type="file"
+                onChange={ uploadFileHandler }
+                ref={ (input) => setFileInput(input) }
+                style={ { display: 'none' } }
+              />
+              <Button
+                onClick={ () => fileInput.click() }
+              >
+                Adicionar imagem
+              </Button>
+              <Text ml="2" display="inline">{ productData.image && productData.image.name }</Text>
             </FormLabel>
           </FormControl>
+          <Button type="button" isDisabled={ disableSubmit } onClick={ submitHandler }>Cadastrar</Button>
         </Flex>
-        <FormControl id="image" mb="6">
-          <FormLabel display="column">
-            <Text>Imagem do produto</Text>
-            <input
-              type="file"
-              onChange={ uploadFileHandler }
-              ref={ (input) => setFileInput(input) }
-              style={ { display: 'none' } }
-            />
-            <Button
-              onClick={ () => fileInput.click() }
-            >
-              Adicionar imagem
-            </Button>
-            <Text ml="2" display="inline">{ productData.image && productData.image.name }</Text>
-          </FormLabel>
-        </FormControl>
-        <Button type="button" isDisabled={ disableSubmit } onClick={ submitHandler }>Cadastrar</Button>
       </Flex>
-    </Flex>
+    </>
   );
 }
 
