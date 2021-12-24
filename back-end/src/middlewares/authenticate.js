@@ -8,8 +8,7 @@ module.exports = (req, _res, next) => {
 
     if (!authorization) next({ status: 401, message: 'Autorização não encontrada' });
   
-    const result = jwt.verify(authorization, SECRET);
-    const { data } = result;
+    const data = jwt.verify(authorization, SECRET);
     
     req.auth = { ...data };
 
