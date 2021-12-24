@@ -27,7 +27,8 @@ const upload = multer({ storage });
 
 app.use('/images', express.static(path.join(__dirname, '..', '/uploads')));
 app.post('/image-upload', upload.single('image'), authenticateMiddleware, productsController.uploadImage);
-app.post('/create-product', authenticateMiddleware, productsController.createProduct)
+app.post('/create-product', authenticateMiddleware, productsController.createProduct);
+app.get('/products', productsController.getAllProducts);
 
 app.post('/register', userController.registerUser);
 app.post('/login', userController.login);

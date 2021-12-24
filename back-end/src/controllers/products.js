@@ -23,9 +23,22 @@ const createProduct = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
+
+const getAllProducts = async (req, res, next) => {
+  try {
+    const { status, result, error } = await productService.getAllProducts();
+
+    if (error) next({ status, message: error });
+
+    return res.status(status).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   uploadImage,
   createProduct,
+  getAllProducts,
 };
