@@ -7,6 +7,7 @@ const path = require('path');
 const userController = require('../controllers/user');
 const productsController = require('../controllers/products');
 const errorMiddleware = require('../middlewares/error');
+const authenticateMiddleware = require('../middlewares/authenticate');
 
 const app = express();
 
@@ -25,7 +26,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.use('/images', express.static(path.join(__dirname, '..', '/uploads')));
-app.post('/image-upload', upload.single('image'), productsController.uploadImage);
+app.post('/image-upload', upload.single('image'), authenticateMiddleware, productsController.uploadImage);
+app.post('/create-product', authenticateMiddleware, productsController.createProduct)
 
 app.post('/register', userController.registerUser);
 app.post('/login', userController.login);
