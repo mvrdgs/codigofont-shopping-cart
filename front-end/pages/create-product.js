@@ -59,7 +59,7 @@ function CreateProduct() {
       });
 
       const { name, price, stock } = productData;
-      const data = { name, price, stock, image: fileUrl };
+      const data = { name, price, stock: Number(stock), image: fileUrl };
 
       await connection({
         method: 'post',
