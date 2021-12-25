@@ -1,4 +1,4 @@
-# Shopping Cart
+# Desafio de Desenvolvimento Web
 
 ## Requisitos do Sistema
 
