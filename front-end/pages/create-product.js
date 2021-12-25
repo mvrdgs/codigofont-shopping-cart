@@ -61,13 +61,12 @@ function CreateProduct() {
       const { name, price, stock } = productData;
       const data = { name, price, stock, image: fileUrl };
 
-      const result = await connection({
+      await connection({
         method: 'post',
         endpoint: '/create-product',
         data,
         token,
       });
-      console.log(result);
 
       fileInput.value = '';
       setProductData({ name: '', price: '', stock: '', image: '' })
