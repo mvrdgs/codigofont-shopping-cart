@@ -29,7 +29,7 @@ app.use('/images', express.static(path.join(__dirname, '..', '/uploads')));
 app.post('/image-upload', upload.single('image'), authenticateMiddleware, productsController.uploadImage);
 app.post('/create-product', authenticateMiddleware, productsController.createProduct);
 app.get('/products', productsController.getAllProducts);
-app.get('/products-list', productsController.getProductsById);
+app.post('/products-list', authenticateMiddleware, productsController.getProductsById);
 
 app.post('/register', userController.registerUser);
 app.post('/login', userController.login);
