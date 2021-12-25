@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
 const MONGO_DB_URL = process.env.DB_URL;
-const DB_NAME = 'codigo_fonte';
+const DB_NAME = process.env.DB_NAME;
 
 let schema = null;
 

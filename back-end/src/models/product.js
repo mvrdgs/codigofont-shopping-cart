@@ -9,8 +9,7 @@ const createProduct = async ({ name, price, stock, image, userId }) => {
 
 const getAllProducts = async () => {
   const db = await connection();
-  const result = db.collection('products').find({}).toArray();
-  console.log(result);
+  const result = await db.collection('products').find({}).toArray();
 
   return result;
 }
