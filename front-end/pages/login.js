@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Flex, FormControl, FormErrorMessage, FormLabel, Input, Link } from '@chakra-ui/react';
 import Router from 'next/router';
 import regex from '/utils/regex';
-import connection from '../utils/axios';
+import connection from '/utils/axios';
 import jwt from 'jsonwebtoken';
 
 function Login() {

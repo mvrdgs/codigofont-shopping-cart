@@ -13,8 +13,8 @@ import {
   Button,
   Text,
 } from '@chakra-ui/react';
-import connection from '../utils/axios';
-import Header from '../components/Header';
+import connection from '/utils/axios';
+import Header from '/components/Header';
 
 function CreateProduct() {
   const [productData, setProductData] = useState({ name: '', price: '', stock: '', image: '' });
