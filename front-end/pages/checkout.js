@@ -1,4 +1,5 @@
 import { Button, Flex, Text } from '@chakra-ui/react';
+import Router from 'next/router';
 import React, { useEffect, useState } from 'react';
 import CartCard from '../components/CartCard';
 import Header from '/components/Header';
@@ -7,6 +8,7 @@ import connection from '/utils/axios';
 function Cart() {
   const [cartData, setCartData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [message, setMessage] = useState('Seu carrinho está vazio');
 
   const getData = async (productsList) => {
     const token = localStorage.getItem('token');
@@ -42,6 +44,26 @@ function Cart() {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
+  const checkoutHandler = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      await connection({
+        method: 'post',
+        endpoint: '/checkout',
+        data: { productsList: cartData },
+        token,
+      });
+
+      localStorage.setItem('cart', '[]');
+      setCartData([]);
+      setMessage('Compra realizada com sucesso');
+
+      setTimeout(() => Router.push('/products'), 10000)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -55,7 +77,7 @@ function Cart() {
                 }
                 <Flex mt="5" justifyContent="space-between">
                   <Text>Total: R$ { totalPrice.toFixed(2).toString().replace('.', ',') }</Text>
-                  <Button color="white" bgColor="green">Comprar</Button>
+                  <Button onClick={ checkoutHandler } color="white" bgColor="green">Comprar</Button>
                 </Flex>
               </>
             )
@@ -66,7 +88,7 @@ function Cart() {
                 minWidth="50vw"
                 minHeight="30vh"
               >
-                Seu carrinho está vazio
+                { message }
               </Flex>
             )
           }
