@@ -25,8 +25,8 @@ function Navigation(props) {
           <DrawerHeader>Navegação</DrawerHeader>
           <DrawerBody>
             <Link display="block" href="/products">Produtos</Link>
-            <Link display="block" href="/create-product">Criar Produtos</Link>
             <Link display="block" href="/checkout">Carrinho</Link>
+            <Link display="block" href="/create-product">Criar Produtos</Link>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

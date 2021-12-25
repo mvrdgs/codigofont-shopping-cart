@@ -4,6 +4,7 @@ import Router from 'next/router';
 import CartCard from '../components/CartCard';
 import Header from '/components/Header';
 import connection from '/utils/axios';
+import styles from '/styles/products.module.css';
 
 function Cart() {
   const [cartData, setCartData] = useState([]);
@@ -74,13 +75,20 @@ function Cart() {
     <>
       <Header />
       <Flex alignItems="center" justifyContent="center" bgColor="blue.400" height="100vh">
-        <Flex bgColor="white" p="10" direction="column" gap="3" rounded="10">
+        <Flex bgColor="white" p="10" maxHeight="80vh" direction="column" rounded="10">
           {
             cartData.length ? (
               <>
-                {
-                  cartData.map((product) => <CartCard key={ product.productId } { ...product } removeFromCart={ removeFromCart } />)
-                }
+                <Flex
+                  className={ styles['scrollbar-hidden'] }
+                  direction="column"
+                  gap="3"
+                  overflow="scroll"
+                >
+                  {
+                    cartData.map((product) => <CartCard key={ product.productId } { ...product } removeFromCart={ removeFromCart } />)
+                  }
+                </Flex>
                 <Flex mt="5" justifyContent="space-between">
                   <Text>Total: R$ { totalPrice.toFixed(2).toString().replace('.', ',') }</Text>
                   <Button onClick={ checkoutHandler } color="white" bgColor="green">Comprar</Button>
