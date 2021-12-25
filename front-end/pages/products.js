@@ -28,7 +28,7 @@ function Products({ productsData }) {
           overflow="scroll"
         >
           {
-            productsData.sort().map((product) => (
+            productsData.sort((a, b) => a.stock > 0 && -1).map((product) => (
               <ProductCard key={product.productId} { ...product } />
             ))
           }
