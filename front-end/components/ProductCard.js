@@ -47,13 +47,13 @@ function ProductCard({ productId, name, price, image, stock }) {
       <GridItem colSpan={1}>Preço: { formatedPrice }</GridItem>
       <GridItem justifySelf="center" colSpan="2">
         <Button
-          bgColor="green"
-          color="white"
+          bgColor={ stock > 1 ? 'green' : 'gray' }
+          color={ stock > 1 ? 'white' : 'black' }
           onClick={ addToCart }
           isDisabled={ stock < 1 }
           hidden={ cartData.includes(productId) }
         >
-            Adicionar ao carrinho
+            { stock > 1 ? 'Adicionar ao carrinho' : 'Produto indisponível' }
         </Button>
         <Button
           bgColor="red.400"
