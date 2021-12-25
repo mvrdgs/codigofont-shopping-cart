@@ -7,12 +7,12 @@
 
 ## Como rodar localmente
 - Faça o clone do projeto
-- Entre em cada uma das pastas
-- Instale as dependências:
-```
-npm install
-```
-- Utilize o script **dev**
-```
-npm run dev
-```
+- Entre em cada um dos diretórios
+  - Instale as dependências:
+  ```
+  npm install
+  ```
+  - Utilize o script **dev**
+  ```
+  npm run dev
+  ```
