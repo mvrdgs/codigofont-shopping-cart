@@ -12,6 +12,7 @@ import {
   NumberInputField,
   Button,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import connection from '/utils/axios';
 import Header from '/components/Header';
@@ -21,6 +22,7 @@ function CreateProduct() {
   const [fileInput, setFileInput] = useState(null);
   const [error, setError] = useState('');
   const [disableSubmit, setDisableSubmit] = useState(true);
+  const toast = useToast();
   
   const handleChange = ({ target }) => {
     if (error) setError(false);
@@ -66,6 +68,14 @@ function CreateProduct() {
         endpoint: '/create-product',
         data,
         token,
+      });
+
+      toast({
+        title: 'Concluído!',
+        description: 'Produto cadastrado com sucesso',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
       });
 
       fileInput.value = '';

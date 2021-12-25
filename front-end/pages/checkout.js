@@ -59,13 +59,13 @@ function Cart() {
       setCartData([]);
       toast({
         title: 'Concluído!',
-        description: "Compra realizada com sucesso",
+        description: 'Compra realizada com sucesso',
         status: 'success',
         duration: 9000,
         isClosable: true,
-      })
+      });
 
-      setTimeout(() => Router.push('/products'), 10000)
+      setTimeout(() => Router.push('/products'), 10000);
     } catch (error) {
       console.log(error);
     }
