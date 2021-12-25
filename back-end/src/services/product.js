@@ -16,7 +16,16 @@ const getAllProducts = async () => {
   return { result, status: 200 };
 };
 
+const getProductsById = async (productsList) => {
+  const data = await productModel.getProductsById(productsList);
+
+  const result = data.map(({ _id, name, price, stock, image }) => ({ productId: _id, name, price, stock, image }));
+
+  return { result, status: 200 };
+};
+
 module.exports = {
   createProduct,
   getAllProducts,
+  getProductsById,
 };
