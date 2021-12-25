@@ -30,6 +30,7 @@ app.post('/image-upload', upload.single('image'), authenticateMiddleware, produc
 app.post('/create-product', authenticateMiddleware, productsController.createProduct);
 app.get('/products', productsController.getAllProducts);
 app.post('/products-list', authenticateMiddleware, productsController.getProductsById);
+app.post('/checkout', authenticateMiddleware, productsController.createSale);
 
 app.post('/register', userController.registerUser);
 app.post('/login', userController.login);

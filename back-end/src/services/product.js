@@ -24,8 +24,15 @@ const getProductsById = async (productsList) => {
   return { result, status: 200 };
 };
 
+const createSale = async ({ userId, productsList }) => {
+  const data = await productModel.createSale({ userId, productsList });
+
+  return { result: data, status: 200 };
+};
+
 module.exports = {
   createProduct,
   getAllProducts,
   getProductsById,
+  createSale,
 };

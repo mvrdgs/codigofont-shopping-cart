@@ -26,8 +26,20 @@ const getProductsById = async (productsList) => {
   return result;
 }
 
+const createSale = async ({ productsList, userId }) => {
+  const list = productsList.map(({ productId }) => ObjectId(productId));
+
+  const db = await connection();
+  await db.collection('sales').insertOne({ userId, productsList });
+  await db.collection('products').updateMany(
+    { _id: { $in: list } },
+    { $inc: { stock: -1 } },
+  );
+};
+
 module.exports = {
   createProduct,
   getAllProducts,
   getProductsById,
+  createSale,
 };

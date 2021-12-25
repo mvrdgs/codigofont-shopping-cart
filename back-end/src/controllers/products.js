@@ -41,9 +41,22 @@ const getProductsById = async (req, res, next) => {
   try {
     const { productsList } = req.body;
 
-    console.log(req.body);
-
     const { status, result, error } = await productService.getProductsById(productsList);
+
+    if (error) next({ status, message: error });
+
+    return res.status(status).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const createSale = async (req, res, next) => {
+  try {
+    const { productsList } = req.body;
+    const { userId } = req.auth;
+
+    const { status, result, error } = await productService.createSale({ productsList, userId });
 
     if (error) next({ status, message: error });
 
@@ -58,4 +71,5 @@ module.exports = {
   createProduct,
   getAllProducts,
   getProductsById,
+  createSale,
 };
