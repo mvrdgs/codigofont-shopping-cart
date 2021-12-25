@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
-import { Button, Flex, Spacer, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Spacer,
+  Text,
+} from '@chakra-ui/react';
 import jwt from 'jsonwebtoken';
+import Navigation from '/components/Navigation';
 
 function Header() {
   const [email, setEmail] = useState('');
@@ -30,6 +36,8 @@ function Header() {
       rounded="2"
       width="100%"
     >
+      <Navigation />
+      <Spacer />
       <Text ml="6">Awesome Store</Text>
       <Spacer />
       <Text mr="6">{ email }</Text>
