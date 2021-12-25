@@ -12,12 +12,12 @@ const login = async ({ email, password }) => {
 
 const registerUser = async ({ email, password }) => {
   const db = await connection();
-  const { _id } = await db.collection('users').insertOne({
+  const { insertedId } = await db.collection('users').insertOne({
     email,
     password,
   });
 
-  return { userId: _id, email };
+  return { userId: insertedId, email };
 };
 
 const searchEmail = async (email) => {

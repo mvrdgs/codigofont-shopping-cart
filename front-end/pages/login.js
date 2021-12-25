@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Flex, FormControl, FormErrorMessage, FormLabel, Input, Link } from '@chakra-ui/react';
 import Router from 'next/router';
-import regex from '../utils/regex';
-import connection from '../utils/axios';
+import regex from '/utils/regex';
+import connection from '/utils/axios';
 import jwt from 'jsonwebtoken';
 
 function Login() {
@@ -28,7 +28,6 @@ function Login() {
     e.preventDefault();
     
     try {
-      console.log('aqui')
       const { data: { token } } = await connection({
         endpoint: '/login',
         method: 'post',

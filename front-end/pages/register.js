@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
 import { Flex, FormLabel, Input, FormControl, FormErrorMessage } from '@chakra-ui/react';
-import regex from '../utils/regex';
-import connection from '../utils/axios';
+import regex from '/utils/regex';
+import connection from '/utils/axios';
 
 function Register() {
   const [registerData, setRegisterData] = useState({ email: '', password: '', confirmPassword: '' });

@@ -5,4 +5,7 @@ module.exports = {
     destination: '/login',
     permanent: false,
   }],
+  images: {
+    domains: ['localhost',],
+  },
 };
