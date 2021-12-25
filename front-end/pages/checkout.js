@@ -1,6 +1,6 @@
-import { Button, Flex, Text } from '@chakra-ui/react';
-import Router from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { useToast, Button, Flex, Text } from '@chakra-ui/react';
+import Router from 'next/router';
 import CartCard from '../components/CartCard';
 import Header from '/components/Header';
 import connection from '/utils/axios';
@@ -8,7 +8,7 @@ import connection from '/utils/axios';
 function Cart() {
   const [cartData, setCartData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [message, setMessage] = useState('Seu carrinho está vazio');
+  const toast = useToast();
 
   const getData = async (productsList) => {
     const token = localStorage.getItem('token');
@@ -56,7 +56,13 @@ function Cart() {
 
       localStorage.setItem('cart', '[]');
       setCartData([]);
-      setMessage('Compra realizada com sucesso');
+      toast({
+        title: 'Concluído!',
+        description: "Compra realizada com sucesso",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
 
       setTimeout(() => Router.push('/products'), 10000)
     } catch (error) {
@@ -88,7 +94,7 @@ function Cart() {
                 minWidth="50vw"
                 minHeight="30vh"
               >
-                { message }
+                Seu carrinho está vazio
               </Flex>
             )
           }
